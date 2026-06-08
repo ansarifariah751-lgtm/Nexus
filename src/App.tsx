@@ -33,6 +33,7 @@ import { ChatPage } from './pages/chat/ChatPage';
 // New Pages
 import CalendarPage from './pages/calendar/CalendarPage';
 import VideoCallPage from './pages/video/VideoCallPage';
+import DocumentChamberPage from './pages/documents-chamber/DocumentChamberPage';
 
 function App() {
   return (
@@ -96,6 +97,11 @@ function App() {
           {/* Video Call Route */}
           <Route path="/video-call" element={<DashboardLayout />}>
             <Route index element={<VideoCallPage />} />
+          </Route>
+
+          {/* Document Chamber Route */}
+          <Route path="/document-chamber" element={<DashboardLayout />}>
+            <Route index element={<DocumentChamberPage />} />
           </Route>
           
           {/* Chat Routes */}
