@@ -26,13 +26,13 @@ import { DocumentsPage } from './pages/documents/DocumentsPage';
 import { SettingsPage } from './pages/settings/SettingsPage';
 import { HelpPage } from './pages/help/HelpPage';
 import { DealsPage } from './pages/deals/DealsPage';
-import CalendarPage from './pages/calendar/CalendarPage';
-<Route path="/calendar" element={<DashboardLayout />}>
-  <Route index element={<CalendarPage />} />
-</Route>
 
 // Chat Pages
 import { ChatPage } from './pages/chat/ChatPage';
+
+// New Pages
+import CalendarPage from './pages/calendar/CalendarPage';
+import VideoCallPage from './pages/video/VideoCallPage';
 
 function App() {
   return (
@@ -88,16 +88,15 @@ function App() {
             <Route index element={<DealsPage />} />
           </Route>
 
-          <Route path="/deals" element={<DashboardLayout />}>
-            <Route index element={<DealsPage />} />
-          </Route>
-          
           {/* Calendar Route */}
           <Route path="/calendar" element={<DashboardLayout />}>
             <Route index element={<CalendarPage />} />
           </Route>
-          
-          {/* Chat Routes */}
+
+          {/* Video Call Route */}
+          <Route path="/video-call" element={<DashboardLayout />}>
+            <Route index element={<VideoCallPage />} />
+          </Route>
           
           {/* Chat Routes */}
           <Route path="/chat" element={<DashboardLayout />}>
@@ -108,7 +107,7 @@ function App() {
           {/* Redirect root to login */}
           <Route path="/" element={<Navigate to="/login" replace />} />
           
-          {/* Catch all other routes and redirect to login */}
+          {/* Catch all other routes */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Router>
