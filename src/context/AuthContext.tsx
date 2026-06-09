@@ -13,7 +13,7 @@ const RESET_TOKEN_KEY = 'business_nexus_reset_token';
 // Auth Provider Component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Check for stored user on initial load
   useEffect(() => {
