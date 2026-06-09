@@ -1,27 +1,19 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import { User, UserRole, AuthContextType } from '../types';
 import { users } from '../data/users';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
 const USER_STORAGE_KEY = 'business_nexus_user';
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  let persistedUser: User | null = null;
+let persistedUser: User | null = null;
 try {
-  const s = localStorage.getItem('business_nexus_user') || sessionStorage.getItem('business_nexus_user');
+  const s = localStorage.getItem(USER_STORAGE_KEY) || sessionStorage.getItem(USER_STORAGE_KEY);
   if (s) persistedUser = JSON.parse(s);
 } catch {}
-  
+
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(persistedUser);
-    try {
-      const stored = localStorage.getItem(USER_STORAGE_KEY) || sessionStorage.getItem(USER_STORAGE_KEY);
-      return stored ? JSON.parse(stored) : null;
-    } catch {
-      return null;
-    }
-  });
   const [isLoading, setIsLoading] = useState(false);
 
   const login = async (email: string, password: string, role: UserRole): Promise<void> => {
@@ -80,8 +72,8 @@ try {
   const forgotPassword = async (email: string): Promise<void> => {
     try {
       await new Promise(resolve => setTimeout(resolve, 500));
-      const user = users.find(u => u.email === email);
-      if (!user) throw new Error('No account found with this email');
+      const foundUser = users.find(u => u.email === email);
+      if (!foundUser) throw new Error('No account found with this email');
       toast.success('Password reset instructions sent to your email');
     } catch (error) {
       toast.error((error as Error).message);
