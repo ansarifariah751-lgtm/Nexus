@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { 
   Home, Building2, CircleDollarSign, Users, MessageCircle, 
-  Bell, FileText, Settings, HelpCircle, CalendarDays, Video
+  Bell, FileText, Settings, HelpCircle, CalendarDays, 
+  Video, Wallet, Shield
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -45,6 +46,8 @@ export const Sidebar: React.FC = () => {
     { to: '/calendar', icon: <CalendarDays size={20} />, text: 'Calendar' },
     { to: '/video-call', icon: <Video size={20} />, text: 'Video Call' },
     { to: '/document-chamber', icon: <FileText size={20} />, text: 'Doc Chamber' },
+    { to: '/payment', icon: <Wallet size={20} />, text: 'Payments' },
+    { to: '/security', icon: <Shield size={20} />, text: 'Security' },
   ];
   
   const investorItems = [
@@ -57,6 +60,8 @@ export const Sidebar: React.FC = () => {
     { to: '/calendar', icon: <CalendarDays size={20} />, text: 'Calendar' },
     { to: '/video-call', icon: <Video size={20} />, text: 'Video Call' },
     { to: '/document-chamber', icon: <FileText size={20} />, text: 'Doc Chamber' },
+    { to: '/payment', icon: <Wallet size={20} />, text: 'Payments' },
+    { to: '/security', icon: <Shield size={20} />, text: 'Security' },
   ];
   
   const sidebarItems = user.role === 'entrepreneur' ? entrepreneurItems : investorItems;
