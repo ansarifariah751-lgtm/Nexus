@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { 
   Home, Building2, CircleDollarSign, Users, MessageCircle, 
@@ -14,29 +14,20 @@ interface SidebarItemProps {
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ to, icon, text }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isActive = location.pathname === to;
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigate(to);
-  };
-
   return (
-    
-      href={`#${to}`}
-      onClick={handleClick}
-      className={`flex items-center py-2.5 px-4 rounded-md transition-colors duration-200 cursor-pointer ${
-        isActive 
-          ? 'bg-primary-50 text-primary-700' 
-          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-      }`}
+    <NavLink
+      to={to}
+      className={({ isActive }) => 
+        `flex items-center py-2.5 px-4 rounded-md transition-colors duration-200 ${
+          isActive 
+            ? 'bg-primary-50 text-primary-700' 
+            : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+        }`
+      }
     >
       <span className="mr-3">{icon}</span>
       <span className="text-sm font-medium">{text}</span>
-    </a>
+    </NavLink>
   );
 };
 
