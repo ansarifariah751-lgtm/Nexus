@@ -32,15 +32,21 @@ export const LoginPage: React.FC = () => {
   };
   
   // For demo purposes, pre-filled credentials
-  const fillDemoCredentials = (userRole: UserRole) => {
-    if (userRole === 'entrepreneur') {
-      setEmail('sarah@techwave.io');
-      setPassword('password123');
-    } else {
-      setEmail('michael@vcinnovate.com');
-      setPassword('password123');
-    }
+const fillDemoCredentials = async (userRole: UserRole) => {
+    const email = userRole === 'entrepreneur' ? 'sarah@techwave.io' : 'michael@vcinnovate.com';
+    const password = 'password123';
+    setEmail(email);
+    setPassword(password);
     setRole(userRole);
+    setError(null);
+    setIsLoading(true);
+    try {
+      await login(email, password, userRole);
+      navigate(userRole === 'entrepreneur' ? '/dashboard/entrepreneur' : '/dashboard/investor');
+    } catch (err) {
+      setError((err as Error).message);
+      setIsLoading(false);
+    }
   };
   
   return (
