@@ -8,7 +8,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const USER_STORAGE_KEY = 'business_nexus_user';
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(() => {
+  let persistedUser: User | null = null;
+try {
+  const s = localStorage.getItem('business_nexus_user') || sessionStorage.getItem('business_nexus_user');
+  if (s) persistedUser = JSON.parse(s);
+} catch {}
+  
+  const [user, setUser] = useState<User | null>(persistedUser);
     try {
       const stored = localStorage.getItem(USER_STORAGE_KEY) || sessionStorage.getItem(USER_STORAGE_KEY);
       return stored ? JSON.parse(stored) : null;
